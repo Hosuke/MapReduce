@@ -102,3 +102,36 @@
  
  要求:请编写 MapReduce 程序实现 
  其他:只有数据样例，没有数据。
+ 
+ ## KMeans
+ 
+ ### K均值聚类算法
+ /src/main/java/com/hosuke/mapreduce/kmeans
+ 
+ 先用CreateTrainingDataSet创建测试文件：
+ 包括起始的K个点（默认为10个）
+ 和100MB左右的测试点
+ 
+ 然后修改好KMeans中的输入输出路径
+ 就可以跑了
+ 
+ #### Mapper 
+ OUTPUT: <centroid,point>
+ 
+ 键代表目前该点所属的中心点
+ 
+ ####Combiner
+ INPUT: Mapper Output
+ 
+ OUTPUT:<centroid, string((sum of point)+(point count))
+ 
+ 这些值用于计算reducer中的新中心点的位置
+ 
+ ####Reducer
+ INPUT: Combiner Output
+ 
+ OUTPUT: <new_centroid,count_of_current_unchanged_centroid_point>
+ 
+ 记录收敛状况看是否需要进行下一次迭代更新
+ 
+ [k-means wikipedia](https://en.wikipedia.org/wiki/K-means_clustering)

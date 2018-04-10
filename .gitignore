@@ -1,3 +1,6 @@
 
 .idea/
 target/
+input/kmeans
+output/newCentroid
+output/kmeans
